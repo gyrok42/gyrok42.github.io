@@ -1,4 +1,4 @@
-# gyrok42.com
+# Website repository - gyrok42.com
 
 Welcome to the *gyrok42.com* repository!<br>
 This project hosts the source code and content for the website, deployed using *GitHub Pages*.
