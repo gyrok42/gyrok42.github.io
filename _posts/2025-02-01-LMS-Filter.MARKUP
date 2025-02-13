@@ -1,9 +1,9 @@
 ---
 layout: single
-title:  "Adaptive LMS Filter (AEC)"
+title:  "Adaptive LMS Filter"
 date:   2025-02-01 9:31::00 -0800
 ---
-<h1>Adaptive LMS Filter for Acoustic Echo Cancellation</h1>
+In this post, I'll discuss the acoustic echo issue in communication systems and how the LMS filter can be used for Acoustic Echo Cancellation.
 
 <h2>1. Problem Setup</h2>
 <p>In an <strong>acoustic echo cancellation</strong> system:</p>
@@ -22,6 +22,9 @@ date:   2025-02-01 9:31::00 -0800
     <li>\( y(n) \) → <strong>Adaptive filter output</strong> (estimated echo)</li>
     <li>\( e(n) = d(n) - y(n) \) → <strong>Error signal</strong> (ideally just the near-end speech)</li>
 </ul>
+
+<img src="/assets/images/acoustic-echo-cancellation.png" alt="AEC - Acoustic Echo Cancellation" width="600">
+
 <p>The LMS filter updates its weights to minimize the squared error:</p>
 <p>\[ w(n+1) = w(n) + \mu e(n) x(n) \]</p>
 <p>Where:</p>
