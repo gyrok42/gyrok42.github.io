@@ -1,0 +1,67 @@
+---
+layout: single
+title:  "Codecs Part I - VLQ"
+date:   2025-02-10 9:31::00 -0800
+---
+<h2>What is VLQ?</h2>
+<p>VLQ (Variable-Length Quantity) is a method for encoding integers in a compact, variable-length format. It is widely used in file formats such as <strong>MIDI</strong>, <strong>DWARF debugging information</strong>, and <strong>Google Protocol Buffers</strong>.</p>
+
+<h2>How VLQ Works</h2>
+<p>VLQ encodes integers using <strong>7-bit chunks</strong> in each byte, where:</p>
+<ul>
+    <li>The first 7 bits store the number's data.</li>
+    <li>The Most Significant Bit (MSB) acts as a continuation flag.</li>
+    <li>If <code>MSB = 1</code>, another byte follows.</li>
+    <li>If <code>MSB = 0</code>, it's the last byte.</li>
+</ul>
+
+<p>
+VLQ decoder implementation:  
+<a href="https://github.com/gyrok42/gyrok42-training/blob/3c652f3b1d912c39b4e3296ee281341fd4a14b15/src/codecs/vlq.cc" target="_blank">VLQ Implementation</a><br>
+There you can find a number of embedded systems programming examples. You may download the repo and
+run all the examples. Please take a look at the 
+<a href="https://github.com/gyrok42/gyrok42-training/blob/3c652f3b1d912c39b4e3296ee281341fd4a14b15/README.md" target="_blank">readme</a>.
+</p>
+
+<h2>Encoding Example</h2>
+<p>Let's encode the number <strong>300</strong> using VLQ:</p>
+<ol>
+    <li>Convert <code>300</code> to binary: <code>100101100</code> (9 bits).</li>
+    <li>Split it into 7-bit chunks (right to left): <br><code>00101100 00000010</code></li>
+    <li>Set MSB for all but the last byte: <br><code>10101100 00000010</code></li>
+    <li>Encoded as two bytes: <code>0xAC 0x02</code></li>
+</ol>
+
+<h2>Decoding VLQ</h2>
+<p>To decode, remove the MSBs and concatenate the remaining 7-bit chunks:</p>
+<pre style="background-color: #10b5c2; padding: 10px; border-radius: 5px;"><code class="language-c">// VLQ Decoding Example
+Binary representation:
+10101100 00000010  // (VLQ encoded value)
+
+// Remove MSBs:
+0101100 0000010
+
+// Reassemble:
+0000010 0101100 = 100101100 (300)</code></pre>
+
+<h2>Use Cases</h2>
+<ul>
+    <li><strong>MIDI Files</strong>: Used to store delta times efficiently.</li>
+    <li><strong>DWARF Debugging Format</strong>: Found in ELF executables.</li>
+    <li><strong>Google Protocol Buffers</strong>: Uses a similar technique called <em>varint</em>.</li>
+</ul>
+
+<h2>Advantages</h2>
+<ul>
+    <li>✅ Saves space for small numbers.</li>
+    <li>✅ Efficient for serialization and data streaming.</li>
+    <li>✅ Easy to parse.</li>
+</ul>
+
+<h2>Disadvantages</h2>
+<ul>
+    <li>❌ Processing overhead due to bit manipulation.</li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>VLQ is an efficient way to encode integers compactly and is used in various applications. It balances space efficiency and processing overhead, making it a common choice in data serialization and file formats.</p>
