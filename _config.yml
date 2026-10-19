@@ -20,7 +20,7 @@ rtl                      : # true, false (default) # turns direction of the page
 title                    : "Gyrok42"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Jairo Borba"
+name                     : "Jairo"
 description              : "Science and Technology"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -113,7 +113,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "Jairo Borba"
+  name             : "Jairo"
   avatar           : "/assets/images/bio-photo.jpeg"
   bio              : "**Science** and **Technology**"
   location         : "Bay Area - California"
